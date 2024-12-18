@@ -40,7 +40,9 @@ class PersonViewSet(viewsets.ViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+    
     def retrieve(self, request, pk=None): # [GET] lấy chi tiết một đối tượng cụ thể
+        lookup_field = 'uid'
         person = get_object_or_404(Person, pk=pk)
         serializer = PersonSerializer(person)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -59,8 +61,8 @@ class PersonViewSet(viewsets.ViewSet):
 
 
 class HistoryViewSet(viewsets.ViewSet):
-    lookup_field = 'date'  # Tùy chỉnh lookup_field
 
+    lookup_field = 'date'
     def retrieve(self, request, date=None):
         """
         Tìm các bản ghi lịch sử dựa trên ngày.
